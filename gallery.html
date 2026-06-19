@@ -3,616 +3,399 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HB Creations – Gallery</title>
+<title>HB Creations – Gallery | Harish Bhatta Official Website</title>
+<meta name="description" content="Explore the interactive visual gallery on HB Creations by Harish Bhatta.">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* RESET */
-* {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#000;}
+/* ================= GLOBAL VARIABLE DESIGN (THEME UNIFICATION) ================= */
+:root {
+  --bg-main: #fcf9f5;
+  --bg-sidebar: #ffffff;
+  --text-main: #2d2a26;
+  --text-inverted: #ffffff;
+  --sidebar-border: #f0eae1;
+  
+  --brand-gradient: linear-gradient(135deg, #ff5a79 0%, #ff6db3 30%, #ff8e43 70%, #facc15 100%); 
+  --panel-bg: linear-gradient(135deg, #fff3eb, #ffe4d3);        
+  --accent-color: #ff5a79;
 
-/* Hide both initially */
-#pcVersion, #mobileVersion {display:none;}
+  --light-hover-bg: #e6f7f4;                                    
+  --light-hover-text: #0d9488;                                  
+  
+  --dash-card-bg: #ffffff;
+  --dash-card-border: #f3ede4;
+  --card-shadow: rgba(223, 190, 169, 0.2);
+  --card-hover-shadow: rgba(255, 90, 121, 0.25);
 
-/* Show mobile */
-@media (max-width:768px){#mobileVersion{display:block;}}
-
-/* Show desktop */
-@media (min-width:769px){#pcVersion{display:block;}}
-
-/* ================= PC Styles ================= */
-#pcVersion .sidebar{
-position:fixed; top:0; left:0; width:360px; height:100vh; background:white; border-right:1px solid #ddd; overflow-y:auto; padding:20px; scrollbar-width:none; transition:all 0.3s ease;
-}
-#pcVersion .sidebar-section{
-margin-bottom:25px; padding:15px; border-radius:12px; background:linear-gradient(135deg,#ffecd2,#fad090); transition:0.3s;
-}
-#pcVersion .sidebar-section h2{margin-bottom:10px;}
-#pcVersion .sidebar-section ul{list-style:none;}
-#pcVersion .sidebar-section li{margin:8px 0; font-weight:500;}
-#pcVersion .sidebar-section li a{
-text-decoration:none; color:#000; display:block; padding:4px 12px; border-radius:10px; transition:all 0.25s ease;
-}
-#pcVersion .sidebar-section li a:hover{background:rgba(255,255,255,0.5); color:#ff4f79; font-weight:700;}
-#pcVersion .sidebar-section li a.active{background:rgba(255,255,255,0.9); color:#ff4f79; font-weight:700;}
-
-#pcVersion .main{margin-left:360px; padding:30px; flex:1; height:100vh; overflow-y:auto; scrollbar-width:thin; scrollbar-color:#bbb transparent;}
-#pcVersion .main::-webkit-scrollbar{width:6px;}
-#pcVersion .main::-webkit-scrollbar-track{background:transparent;}
-#pcVersion .main::-webkit-scrollbar-thumb{background:#bbb;border-radius:10px;}
-#pcVersion .main::-webkit-scrollbar-thumb:hover{background:#888;}
-
-#pcVersion .main-title{
-text-align:center; background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad090); padding:25px 15px; border-radius:12px; color:#fff; font-size:2.2rem; margin-bottom:30px; font-weight:700;
+  --modal-bg: radial-gradient(circle at center, rgba(252, 249, 245, 0.75) 0%, rgba(245, 238, 228, 0.9) 100%);
+  --btn-bg: rgba(45, 42, 38, 0.08);
+  --btn-icon: #2d2a26;
+  --glass-border: rgba(255, 255, 255, 0.5);
 }
 
-#pcVersion .main h2{font-size:1.6rem; margin-bottom:10px; font-weight:600;}
-#pcVersion .card{padding:20px; margin-bottom:20px; border-radius:10px; color:#000; line-height:1.8;}
-#pcVersion .card ul{list-style:disc; margin-left:20px;}
-#pcVersion .card:nth-child(even){background:linear-gradient(135deg,#ffecd2,#fad090);}
-#pcVersion .card:nth-child(odd){background:linear-gradient(135deg,#ff9a9e,#fad0c4);}
+body.dark-mode {
+  --bg-main: #11100e;
+  --bg-sidebar: #181614;
+  --text-main: #f5f2eb;
+  --text-inverted: #11100e;
+  --sidebar-border: #262320;
+  
+  --brand-gradient: linear-gradient(135deg, #ef4444 0%, #f472b6 30%, #f97316 70%, #eab308 100%);
+  --panel-bg: linear-gradient(135deg, #1e1b18, #292420);
+  --accent-color: #ff5a79;
 
+  --light-hover-bg: #ff5a79;
+  --light-hover-text: #11100e;
+  
+  --dash-card-bg: #181614;
+  --dash-card-border: #262320;
+  --card-shadow: rgba(0, 0, 0, 0.5);
+  --card-hover-shadow: rgba(255, 90, 121, 0.15);
 
-/* GALLERY GRID */
-#pcVersion .gallery{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:15px;
-margin-top:10px;
+  --modal-bg: radial-gradient(circle at center, rgba(24, 22, 20, 0.75) 0%, rgba(11, 10, 9, 0.92) 100%);
+  --btn-bg: rgba(255, 255, 255, 0.08);
+  --btn-icon: #f5f2eb;
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
-#pcVersion .gallery-item{
-border-radius:10px;
-overflow:hidden;
-box-shadow:0 6px 15px rgba(0,0,0,0.15);
-cursor:pointer;
-transition:transform 0.2s;
+* {
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  color: var(--text-main);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.2s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-#pcVersion .gallery-item img{
-width:100%;
-aspect-ratio:1/1;
-object-fit:cover;
-display:block;
+body {
+  background-color: var(--bg-main);
 }
 
+#darkModeToggle { display: none; }
+#pcVersion, #mobileVersion { display: none; }
 
-/* SINGLE IMAGE VIEW CARD */
-#pcVersion #singleView{
-display:none;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-overflow:hidden;
-height:100%;
+@media (max-width:768px) { #mobileVersion { display: block; } }
+@media (min-width:769px) { #pcVersion { display: block; } }
+
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0 15px 0;
+  border-bottom: 1px solid var(--sidebar-border);
+  margin-bottom: 15px;
+}
+.theme-switch-wrapper span { font-size: 0.95rem; font-weight: 600; }
+.theme-switch { display: inline-block; height: 26px; position: relative; width: 50px; }
+.slider {
+  background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute;
+  right: 0; top: 0; transition: .4s; border-radius: 34px;
+}
+.slider:before {
+  background-color: white; bottom: 3px; content: ""; height: 20px; left: 4px;
+  position: absolute; transition: .4s; width: 20px; border-radius: 50%;
+}
+body.dark-mode .slider { background-color: var(--accent-color); }
+body.dark-mode .slider:before { transform: translateX(22px); }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
 }
 
-#pcVersion #singleView .viewCard{
-width:1170px;
-max-width:100%;
-background:linear-gradient(135deg,#ffecd2,#fad090);
-border-radius:12px;
-padding:25px;
-margin-bottom:40px;
-line-height:1.2;
-position:relative;
-display:flex;
-flex-direction:column;
-align-items:center;
+.gallery-item-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1; 
+  box-shadow: 0 4px 12px var(--card-shadow);
+  border: 1px solid var(--dash-card-border);
+  background-color: var(--dash-card-bg);
+  cursor: pointer;
 }
 
-#pcVersion #singleView img{
-max-width:100%;
-max-height:70vh;
-border-radius:10px;
-margin-bottom:15px;
-margin-top:15px;
-transition:opacity 0.3s ease-in-out;
-opacity:1;
+@media (min-width: 769px) {
+  .gallery-item-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 18px var(--card-hover-shadow);
+  }
+}
+.gallery-item-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-#pcVersion #singleView .closeBtn{
-position:absolute;
-top:15px;
-right:15px;
-font-size:2.4rem;
-cursor:pointer;
-color:#ff4f79;
+/* ================= PREVIEW BOX LAYER OVERLAYS ================= */
+.confined-lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--modal-bg);
+  backdrop-filter: blur(25px) saturate(170%);
+  -webkit-backdrop-filter: blur(25px) saturate(170%);
+  z-index: 2000;
+  overflow: hidden !important;
+  contain: paint;
+  user-select: none;
 }
 
-#pcVersion #singleView .navBtn{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-font-size:2rem;
-background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-color:#fff;
-border:none;
-padding:10px 15px;
-cursor:pointer;
-border-radius:50%;
+@media (min-width: 769px) {
+  .confined-lightbox {
+    left: 360px;
+    width: calc(100vw - 360px);
+  }
 }
 
-#pcVersion #singleView #prevBtn{left:15px;}
-#pcVersion #singleView #nextBtn{right:15px;}
-
-#pcVersion #singleView #downloadBtn{
-margin-top:10px;
-padding:10px 30px;
-background:#ff7e5f;
-color:#fff;
-border-radius:10px;
-text-decoration:none;
-font-size:1.3rem;
-font-weight:700;
+.lightbox-viewport {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden !important;
+  padding: 40px;
+  position: relative;
 }
 
-
-/* SIDE PREVIEWS */
-#pcVersion .sidePreview{
-position:absolute;
-top:47.5%;
-transform:translateY(-50%);
-width:120px;
-height:200px;
-object-fit:cover;
-border-radius:8px;
-opacity:1;
-cursor:pointer;
-transition: all 0.5s ease;
+.lightbox-viewport img.focal-target {
+  max-width: 75%;
+  max-height: 75%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 14px;
+  z-index: 10;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), inset 0 0 0 1px var(--glass-border);
+  cursor: zoom-in;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.2s ease, box-shadow 0.3s ease;
+  will-change: transform;
 }
 
-
-/* LEFT PREVIEW */
-#pcVersion #prevPreview{
-left:90px;
-
-mask-image: linear-gradient(to right,
-transparent 0%,
-rgba(0,0,0,0.2) 30%,
-rgba(0,0,0,0.5) 60%,
-black 100%);
-
--webkit-mask-image: linear-gradient(to right,
-transparent 0%,
-rgba(0,0,0,0.2) 30%,
-rgba(0,0,0,0.5) 60%,
-black 100%);
+body.dark-mode .lightbox-viewport img.focal-target {
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 1px var(--glass-border);
 }
 
+.lightbox-btn {
+  position: absolute;
+  background: var(--btn-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.lightbox-btn i { color: var(--btn-icon) !important; font-size: 1.25rem; }
+.lightbox-btn:hover { background: var(--accent-color); border-color: transparent; transform: scale(1.05); }
+.lightbox-btn:hover i { color: #ffffff !important; }
 
-/* RIGHT PREVIEW */
-#pcVersion #nextPreview{
-right:90px;
+#closeLightBox { top: 30px; right: 40px; }
+#dlLightBox { top: 30px; left: 40px; }
+#prevLightBox { left: 40px; top: 50%; transform: translateY(-50%); }
+#nextLightBox { right: 40px; top: 50%; transform: translateY(-50%); }
 
-mask-image: linear-gradient(to left,
-transparent 0%,
-rgba(0,0,0,0.2) 30%,
-rgba(0,0,0,0.5) 60%,
-black 100%);
-
--webkit-mask-image: linear-gradient(to left,
-transparent 0%,
-rgba(0,0,0,0.2) 30%,
-rgba(0,0,0,0.5) 60%,
-black 100%);
+@media (max-width: 768px) {
+  #prevLightBox, #nextLightBox { display: none !important; }
+  #closeLightBox { top: 20px; right: 20px; width: 44px; height: 44px; }
+  #dlLightBox { top: 20px; left: 20px; width: 44px; height: 44px; }
 }
 
+.animate-swipe-next { animation: swipeNext 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-swipe-prev { animation: swipePrev 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-
-#pcVersion footer{
-text-align:center; padding:20px; font-size:1rem; font-weight:600; background:linear-gradient(135deg,#ff9f9f,#fad0c4); color:#000; border-radius:10px; line-height:1.6;
+@keyframes swipeNext {
+  0% { transform: translateX(40px) scale(0.97); opacity: 0; }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+@keyframes swipePrev {
+  0% { transform: translateX(-40px) scale(0.97); opacity: 0; }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
 }
 
-/* ================= Mobile Styles ================= */
-#mobileVersion *{
-   -webkit-tap-highlight-color: rgba(255,255,255,0.5);
+/* ================= PC STYLING INTERFACE ================= */
+#pcVersion .sidebar {
+  position: fixed; top: 0; left: 0; width: 360px; height: 100vh; background: var(--bg-sidebar);
+  border-right: 1px solid var(--sidebar-border); overflow-y: auto; padding: 20px; scrollbar-width: none;
 }
-#mobileVersion .main-title{
- display:flex; justify-content:space-between; align-items:center;
- background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad090);
- margin:10px 15px 0px 15px; padding:5px 20px; border-radius:12px;
- font-size:1.6rem; font-weight:400; position: relative;
+#pcVersion .sidebar-section { margin-bottom: 25px; padding: 18px; border-radius: 14px; background: var(--panel-bg); border: 1px solid var(--dash-card-border); }
+#pcVersion .sidebar-section h2 { margin-bottom: 12px; font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
+#pcVersion .sidebar-section ul { list-style: none; }
+#pcVersion .sidebar-section li { margin: 8px 0; font-weight: 500; }
+#pcVersion .sidebar-section li a {
+  text-decoration: none; display: block; padding: 6px 12px; border-radius: 10px; transition: all 0.25s ease;
 }
-#mobileVersion .letters{display:flex; gap:20px; margin-left:50px;}
-#mobileVersion .letters a{text-decoration:none; color:#000; padding:8px 15px; border-radius:25px; font-weight:500; transition: all .3s;}
-#mobileVersion .letters a.active{font-weight:550; background: rgba(255,255,255,0.9);}
-
-#mobileVersion #menu-button{position:absolute; top:-1%; left:5px; z-index:5000; cursor:pointer; font-size:1.8rem; background:transparent; padding:10px 15px; border-radius:10px;}
-#mobileVersion #sidebar{
-position:fixed; top:0; left:-260px; width:260px; height:100%; background:#fff; z-index:1400; padding:10px; transition:left 0.4s; box-shadow:2px 0 12px rgba(0,0,0,0.2); overflow-y:auto;
+#pcVersion .sidebar-section li a:hover, #pcVersion .sidebar-section li a.active {
+  background: var(--light-hover-bg); color: var(--light-hover-text); font-weight: 700;
 }
-#mobileVersion #sidebar.open{left:0;}
-#mobileVersion .sidebar-section{margin-bottom:5px; padding:15px; border-radius:12px; background:linear-gradient(135deg,#ffecd2,#fad090);}
-#mobileVersion .sidebar-section h22{
-  font-size:1.6rem;
-  margin-bottom:10px;
-  font-weight:100;
-  margin-left: 45px;
+#pcVersion .sidebar-section li a:hover *, #pcVersion .sidebar-section li a.active * {
+  color: var(--light-hover-text);
 }
-#mobileVersion .sidebar-section h2{font-size:1.6rem; margin-bottom:10px; font-weight:100; margin-left:10px;}
-#mobileVersion .sidebar-section ul{list-style:none;}
-#mobileVersion .sidebar-section li{margin:8px 0; font-weight:500;}
-#mobileVersion .sidebar-section li a{text-decoration:none; color:#000; display:block; padding:4px 12px; border-radius:10px; transition:all 0.25s ease;}
-#mobileVersion .sidebar-section li a:hover{background:rgba(255,255,255,0.5); color:#ff4f79; font-weight:700;}
-#mobileVersion .sidebar-section li a.active{background:rgba(255,255,255,0.9); color:#ff4f79; font-weight:700;}
+#pcVersion .main { margin-left: 360px; padding: 30px; height: 100vh; overflow-y: auto; background: var(--bg-main); scroll-behavior: smooth; }
 
-#mobileVersion #menuOverlay{position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.2); z-index:1300; display:none;}
-#mobileVersion #menuOverlay.active{display:block;}
-
-#mobileVersion .main{margin:5px; padding:10px; flex:1; overflow-y:auto; scrollbar-width:thin; scrollbar-color:#bbb transparent;}
-#mobileVersion .main::-webkit-scrollbar{width:6px;}
-#mobileVersion .main::-webkit-scrollbar-track{background:transparent;}
-#mobileVersion .main::-webkit-scrollbar-thumb{background:#bbb;border-radius:10px;}
-#mobileVersion .main::-webkit-scrollbar-thumb:hover{background:#888;}
-
-#mobileVersion .section-title{text-align:center; background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad090); padding:10px 10px; border-radius:12px; color:#fff; font-size:1.9rem; margin-bottom:15px; font-weight:700;}
-#mobileVersion .card{padding:20px; margin-bottom:20px; border-radius:10px; color:#000; line-height:1.8;}
-#mobileVersion .card h2{font-size:1.5rem; margin-bottom:5px; font-weight:700; margin-left: -2px;}
-#mobileVersion .card ul{list-style:disc; margin-left:20px;}
-#mobileVersion .card:nth-child(even){background:linear-gradient(135deg,#ffecd2,#fad090);}
-#mobileVersion .card:nth-child(odd){background:linear-gradient(135deg,#ff9a9e,#fad0c4);}
-
-/* GALLERY GRID */
-#mobileVersion .gallery{
-  display:grid;
-  grid-template-columns:repeat(4,1fr); /* 2 columns for small screens */
-  gap:5px;
-  margin-top:-4px;
-  margin-left:-8px;
-  margin-right:-8px;
+#pcVersion .main-title {
+  text-align: center; background: var(--brand-gradient); border: 1px solid transparent;
+  padding: 25px 15px; border-radius: 16px; font-size: 2.2rem; margin-bottom: 30px; font-weight: 800; box-shadow: 0 4px 15px var(--card-shadow);
 }
+#pcVersion .main-title span { color: var(--text-inverted); }
 
-#mobileVersion .gallery-item{
-  border-radius:8px;
-  overflow:hidden;
-  box-shadow:0 4px 10px rgba(0,0,0,0.15);
-  cursor:pointer;
-  transition:transform 0.2s;
+#pcVersion footer {
+  text-align: center; padding: 20px; font-size: 1rem; font-weight: 600; background: var(--brand-gradient); border: 1px solid transparent;
+  border-radius: 12px; line-height: 1.6; margin-top: 20px; box-shadow: 0 4px 15px var(--card-shadow);
 }
+#pcVersion footer span { color: var(--text-inverted); }
 
-#mobileVersion .gallery-item img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  display:block;
+/* ================= MOBILE STYLING INTERFACE ================= */
+#mobileVersion .main-title {
+  display: flex; justify-content: space-between; align-items: center; background: var(--brand-gradient); border: 1px solid transparent;
+  margin: 15px 15px 0px 15px; padding: 12px 20px; border-radius: 14px; font-size: 1.6rem; position: relative; box-shadow: 0 4px 12px var(--card-shadow);
 }
+#mobileVersion .main-title * { color: var(--text-inverted) !important; }
+#mobileVersion .letters { display: flex; gap: 12px; margin-left: 45px; }
+#mobileVersion .letters a { text-decoration: none; padding: 6px 12px; border-radius: 25px; font-weight: 600; font-size: 1.1rem; color: var(--text-inverted); }
+#mobileVersion .letters a.active { font-weight: 700; background: rgba(255, 255, 255, 0.25); color: #ffffff !important; }
+#mobileVersion #menu-button { position: absolute; top: 20%; left: 12px; z-index: 1500; cursor: pointer; font-size: 1.5rem; background: transparent; }
 
-
-/* SINGLE IMAGE VIEW CARD */
-#mobileVersion #singleView{
-  display:none;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  overflow:hidden;
-  height:100%;
-  padding:10px;
-  position:relative; /* required for swipe container */
+#mobileVersion #sidebar {
+  position: fixed; top: 0; left: -260px; width: 260px; height: 100%; background: var(--bg-sidebar); z-index: 1400;
+  padding: 15px; transition: left 0.4s ease; box-shadow: 4px 0 25px rgba(0,0,0,0.15); overflow-y: auto;
 }
+#mobileVersion #sidebar.open { left: 0; }
+#mobileVersion .sidebar-section { margin-bottom: 12px; padding: 15px; border-radius: 12px; background: var(--panel-bg); border: 1px solid var(--dash-card-border); }
+#mobileVersion .sidebar-section * { color: var(--text-main) !important; }
+#mobileVersion .sidebar-section h22 { font-size: 1.3rem; font-weight: 700; margin-left: 40px; display: block; margin-bottom: 10px; }
+#mobileVersion .sidebar-section h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+#mobileVersion .sidebar-section ul { list-style: none; }
+#mobileVersion .sidebar-section li { margin: 8px 0; font-weight: 500; }
+#mobileVersion .sidebar-section li a { text-decoration: none; display: block; padding: 6px 12px; border-radius: 10px; }
+#mobileVersion .sidebar-section li a.active { background: var(--light-hover-bg); color: var(--light-hover-text) !important; font-weight: 700; }
 
-#mobileVersion #singleView .viewCard{
-  width:100%;
-  height:auto;
-  background:linear-gradient(135deg,#ffecd2,#fad090);
-  border-radius:10px;
-  padding:15px;
-  margin-bottom:0px;
-  line-height:1.2;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  overflow:hidden;
-  touch-action: pan-x; /* allow horizontal swipe */
-}
+#mobileVersion #menuOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1300; display: none; }
+#mobileVersion #menuOverlay.active { display: block; }
+#mobileVersion .main { margin: 10px; padding: 10px; flex: 1; background: var(--bg-main); }
 
-#mobileVersion #singleView .swipeContainer{
-  display:flex;
-  flex-direction:row;
-  width:100%;
-  transition:transform 0.3s ease;
-}
+#mobileVersion .section-title { text-align: center; background: #ffffff; border: 1px solid var(--dash-card-border); border-left: 5px solid var(--accent-color); padding: 12px; border-radius: 14px; color: var(--text-main); font-size: 1.5rem; margin-bottom: 20px; font-weight: 700; box-shadow: 0 4px 12px var(--card-shadow); }
+#mobileVersion .section-title span { color: var(--text-main); }
+body.dark-mode #mobileVersion .section-title { background: var(--dash-card-bg); }
 
-#mobileVersion #singleView img{
-  max-width:100%;
-  max-height:50vh; /* smaller height for mobile */
-  border-radius:8px;
-  margin-bottom:10px;
-  margin-top:30px;
-  transition:opacity 0.3s ease-in-out;
-  opacity:1;
-  flex-shrink:0; /* prevent shrinking when swiping */
-}
+#mobileVersion .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
-#mobileVersion #singleView .closeBtn{
-  position:absolute;
-  top:0px;
-  right:10px;
-  font-size:2rem;
-  cursor:pointer;
-  color:#ff4f79;
-}
+#mobileVersion footer { margin-top: 20px; padding: 20px; text-align: center; font-weight: 600; background: var(--brand-gradient); border: 1px solid transparent; border-radius: 12px; box-shadow: 0 4px 12px var(--card-shadow); }
+#mobileVersion footer span { color: var(--text-inverted) !important; }
 
-#mobileVersion #singleView #downloadBtn{
-  margin-top:10px;
-  padding:10px 20px;
-  background:#ff7e5f;
-  color:#fff;
-  border-radius:8px;
-  text-decoration:none;
-  font-size:1.5rem;
-  font-weight:700;
-}
-
-/* SIDE PREVIEWS */
-#mobileVersion .sidePreview{
-  position:absolute;
-  top:47.5%;
-  transform:translateY(-50%);
-  width:80px;  /* smaller preview */
-  height:130px;
-  object-fit:cover;
-  border-radius:6px;
-  opacity:1;
-  cursor:pointer;
-  transition: all 0.5s ease;
-}
-
-/* LEFT PREVIEW */
-#mobileVersion #prevPreview{
-  left:60px;
-  mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.5) 60%, black 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.5) 60%, black 100%);
-}
-
-/* RIGHT PREVIEW */
-#mobileVersion #nextPreview{
-  right:60px;
-  mask-image: linear-gradient(to left, transparent 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.5) 60%, black 100%);
-  -webkit-mask-image: linear-gradient(to left, transparent 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.5) 60%, black 100%);
-}
-
-#mobileVersion footer{
-  margin-top:10px;
-  padding:20px;
-  text-align:center;
-  color:#fff;
-  background:linear-gradient(135deg,#ff9f9f,#fad0c4);
-  border-radius:10px;
-}
-
-/* PC adjustments inside mobile */
 @media(min-width:1025px){
   #mobileVersion #sidebar{left:0 !important; width:360px; box-shadow:none;}
   #mobileVersion .main{margin-left:360px; padding:30px;}
   #mobileVersion #menu-button, #mobileVersion #menuOverlay{display:none;}
-}
-
-/* Hide buttons on mobile */
-@media only screen and (max-width: 768px){
-    #mobileVersion #prevBtn,
-    #mobileVersion #nextBtn,
-    #mobileVersion #prevPreview,
-    #mobileVersion #nextPreview {
-        display: none !important;
-    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= PC VERSION ================= -->
+<input type="checkbox" id="darkModeToggle">
+
 <div id="pcVersion">
-<div class="sidebar">
-<div class="sidebar-section">
-<h2>Menu</h2>
-<ul>
-<li><a href="index.html">🏠 Home</a></li>
-<li><a href="health-advice.html">🩺 Health Advice</a></li>
-<li><a href="body-structure.html">🧬 Body Structure</a></li>
-<li><a href="nature.html">🌿 Nature</a></li>
-</ul>
+  <div class="sidebar">
+    <div class="sidebar-section">
+      <div class="theme-switch-wrapper">
+        <span>🌙 Dark Mode</span>
+        <label class="theme-switch" for="darkModeToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="health-advice.html">🩺 Health Advice</a></li>
+        <li><a href="body-structure.html">🧬 Body Structure</a></li>
+        <li><a href="nature.html">🌿 Nature</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>Information</h2>
+      <ul>
+        <li><a href="daily-exercise.html">🏃 Daily Exercise</a></li>
+        <li><a href="articles.html">📚 Articles</a></li>
+        <li><a href="community.html">👥 Community</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>Additional</h2>
+      <ul>
+        <li><a href="quiz.html">❓ Quiz</a></li>
+        <li><a href="bmi-calculator.html">⚖️ BMI Calculator</a></li>
+        <li><a href="gallery.html" class="active">🖼️ Gallery</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>Connect</h2>
+      <ul>
+        <li><a href="connect.html">📞 Contact</a></li>
+        <li><a href="about.html">ℹ️ About Us</a></li>
+        <li><a href="https://www.facebook.com/harish.bhatta.56305" target="_blank"><i class="fa-brands fa-facebook" style="color:#1877f2; margin-right:6px;"></i> Facebook</a></li>
+        <li><a href="https://www.youtube.com/channel/UC8-7dNFrLe4QynzU5cM68cg" target="_blank"><i class="fa-brands fa-youtube" style="color:#ff0000; margin-right:6px;"></i> YouTube</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="main" id="pcMainViewport">
+    <div class="main-title"><span>Visual Media Gallery</span></div>
+    
+    <div class="gallery-grid" id="pcGrid">
+      <div class="gallery-item-card" onclick="openLightbox(0)"><img src="4.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(1)"><img src="5.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(2)"><img src="6.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(3)"><img src="7.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(4)"><img src="8.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(5)"><img src="9.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(6)"><img src="10.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(7)"><img src="11.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(8)"><img src="12.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(9)"><img src="13.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(10)"><img src="14.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(11)"><img src="15.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(12)"><img src="16.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(13)"><img src="17.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(14)"><img src="18.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(15)"><img src="19.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(16)"><img src="20.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(17)"><img src="21.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(18)"><img src="22.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(19)"><img src="23.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(20)"><img src="24.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(21)"><img src="25.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(22)"><img src="26.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(23)"><img src="27.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(24)"><img src="28.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(25)"><img src="29.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(26)"><img src="30.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(27)"><img src="3.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(28)"><img src="2.jpg" alt="Gallery Media"></div>
+      <div class="gallery-item-card" onclick="openLightbox(29)"><img src="1.jpg" alt="Gallery Media"></div>
+    </div>
+
+    <footer><span>© 2026 HB Creations | Health & Everyday Life | Designed with Care</span></footer>
+  </div>
 </div>
 
-<div class="sidebar-section">
-<h2>Information</h2>
-<ul>
-<li><a href="daily-exercise.html">🏃 Daily Exercise</a></li>
-<li><a href="articles.html">📚 Articles</a></li>
-<li><a href="community.html">👥 Community</a></li>
-</ul>
-</div>
-
-<div class="sidebar-section">
-<h2>Additional</h2>
-<ul>
-<li><a href="quiz.html">❓ Quiz</a></li>
-<li><a href="bmi-calculator.html">⚖️ BMI Calculator</a></li>
-<li><a href="gallery.html" class="active">🖼️ Gallery</a></li>
-</ul>
-</div>
-
-<div class="sidebar-section">
-<h2>Info</h2>
-<ul>
-<li><a href="connect.html">📞 Contact</a></li>
-<li><a href="about.html">ℹ️ About Us</a></li>
-<li><a style="text-decoration:none;color:#1877f2;" href="https://www.facebook.com/harish.bhatta.56305" target="_blank">🌐 Facebook</a></li>
-<li><a style="text-decoration:none;color:#ff0000;" href="https://www.youtube.com/channel/UC8-7dNFrLe4QynzU5cM68cg" target="_blank">▶ YouTube</a></li>
-</ul>
-</div>
-</div>
-
-<div class="main">
-<div class="main-title">Gallery</div>
-
-<!-- GALLERY GRID -->
-<div class="card" id="galleryGrid">
-<div class="gallery">
-<div class="gallery-item"><img src="4.jpg" alt=""></div>
-<div class="gallery-item"><img src="5.jpg" alt=""></div>
-<div class="gallery-item"><img src="6.jpg" alt=""></div>
-<div class="gallery-item"><img src="7.jpg" alt=""></div>
-<div class="gallery-item"><img src="8.jpg" alt=""></div>
-<div class="gallery-item"><img src="9.jpg" alt=""></div>
-<div class="gallery-item"><img src="10.jpg" alt=""></div>
-<div class="gallery-item"><img src="11.jpg" alt=""></div>
-<div class="gallery-item"><img src="12.jpg" alt=""></div>
-<div class="gallery-item"><img src="13.jpg" alt=""></div>
-<div class="gallery-item"><img src="14.jpg" alt=""></div>
-<div class="gallery-item"><img src="15.jpg" alt=""></div>
-<div class="gallery-item"><img src="16.jpg" alt=""></div>
-<div class="gallery-item"><img src="17.jpg" alt=""></div>
-<div class="gallery-item"><img src="18.jpg" alt=""></div>
-<div class="gallery-item"><img src="19.jpg" alt=""></div>
-<div class="gallery-item"><img src="20.jpg" alt=""></div>
-<div class="gallery-item"><img src="21.jpg" alt=""></div>
-<div class="gallery-item"><img src="22.jpg" alt=""></div>
-<div class="gallery-item"><img src="23.jpg" alt=""></div>
-<div class="gallery-item"><img src="24.jpg" alt=""></div>
-<div class="gallery-item"><img src="25.jpg" alt=""></div>
-<div class="gallery-item"><img src="26.jpg" alt=""></div>
-<div class="gallery-item"><img src="27.jpg" alt=""></div>
-<div class="gallery-item"><img src="28.jpg" alt=""></div>
-<div class="gallery-item"><img src="29.jpg" alt=""></div>
-<div class="gallery-item"><img src="30.jpg" alt=""></div>
-<div class="gallery-item"><img src="31.jpg" alt=""></div>
-<div class="gallery-item"><img src="32.jpg" alt=""></div>
-<div class="gallery-item"><img src="33.jpg" alt=""></div>
-<div class="gallery-item"><img src="34.jpg" alt=""></div>
-<div class="gallery-item"><img src="35.jpg" alt=""></div>
-<div class="gallery-item"><img src="36.jpg" alt=""></div>
-<div class="gallery-item"><img src="37.jpg" alt=""></div>
-<div class="gallery-item"><img src="38.jpg" alt=""></div>
-<div class="gallery-item"><img src="39.jpg" alt=""></div>
-<div class="gallery-item"><img src="40.jpg" alt=""></div>
-<div class="gallery-item"><img src="41.jpg" alt=""></div>
-<div class="gallery-item"><img src="42.jpg" alt=""></div>
-<div class="gallery-item"><img src="43.jpg" alt=""></div>
-<div class="gallery-item"><img src="44.jpg" alt=""></div>
-<div class="gallery-item"><img src="45.jpg" alt=""></div>
-<div class="gallery-item"><img src="46.jpg" alt=""></div>
-<div class="gallery-item"><img src="47.jpg" alt=""></div>
-<div class="gallery-item"><img src="48.jpg" alt=""></div>
-<div class="gallery-item"><img src="49.jpg" alt=""></div>
-<div class="gallery-item"><img src="50.jpg" alt=""></div>
-<div class="gallery-item"><img src="51.jpg" alt=""></div>
-<div class="gallery-item"><img src="52.jpg" alt=""></div>
-<div class="gallery-item"><img src="53.jpg" alt=""></div>
-<div class="gallery-item"><img src="54.jpg" alt=""></div>
-<div class="gallery-item"><img src="55.jpg" alt=""></div>
-<div class="gallery-item"><img src="56.jpg" alt=""></div>
-<div class="gallery-item"><img src="57.jpg" alt=""></div>
-<div class="gallery-item"><img src="58.jpg" alt=""></div>
-<div class="gallery-item"><img src="59.jpg" alt=""></div>
-<div class="gallery-item"><img src="60.jpg" alt=""></div>
-<div class="gallery-item"><img src="61.jpg" alt=""></div>
-<div class="gallery-item"><img src="62.jpg" alt=""></div>
-<div class="gallery-item"><img src="63.jpg" alt=""></div>
-<div class="gallery-item"><img src="64.jpg" alt=""></div>
-<div class="gallery-item"><img src="65.jpg" alt=""></div>
-<div class="gallery-item"><img src="66.jpg" alt=""></div>
-<div class="gallery-item"><img src="67.jpg" alt=""></div>
-<div class="gallery-item"><img src="68.jpg" alt=""></div>
-<div class="gallery-item"><img src="69.jpg" alt=""></div>
-<div class="gallery-item"><img src="70.jpg" alt=""></div>
-<div class="gallery-item"><img src="71.jpg" alt=""></div>
-<div class="gallery-item"><img src="72.jpg" alt=""></div>
-<div class="gallery-item"><img src="73.jpg" alt=""></div>
-<div class="gallery-item"><img src="74.jpg" alt=""></div>
-<div class="gallery-item"><img src="75.jpg" alt=""></div>
-<div class="gallery-item"><img src="76.jpg" alt=""></div>
-<div class="gallery-item"><img src="77.jpg" alt=""></div>
-<div class="gallery-item"><img src="78.jpg" alt=""></div>
-<div class="gallery-item"><img src="79.jpg" alt=""></div>
-<div class="gallery-item"><img src="80.jpg" alt=""></div>
-<div class="gallery-item"><img src="81.jpg" alt=""></div>
-<div class="gallery-item"><img src="82.jpg" alt=""></div>
-<div class="gallery-item"><img src="83.jpg" alt=""></div>
-<div class="gallery-item"><img src="84.jpg" alt=""></div>
-<div class="gallery-item"><img src="85.jpg" alt=""></div>
-<div class="gallery-item"><img src="86.jpg" alt=""></div>
-<div class="gallery-item"><img src="87.jpg" alt=""></div>
-<div class="gallery-item"><img src="88.jpg" alt=""></div>
-<div class="gallery-item"><img src="89.jpg" alt=""></div>
-<div class="gallery-item"><img src="90.jpg" alt=""></div>
-<div class="gallery-item"><img src="91.jpg" alt=""></div>
-<div class="gallery-item"><img src="92.jpg" alt=""></div>
-<div class="gallery-item"><img src="93.jpg" alt=""></div>
-<div class="gallery-item"><img src="94.jpg" alt=""></div>
-<div class="gallery-item"><img src="95.jpg" alt=""></div>
-<div class="gallery-item"><img src="96.jpg" alt=""></div>
-<div class="gallery-item"><img src="97.jpg" alt=""></div>
-<div class="gallery-item"><img src="98.jpg" alt=""></div>
-<div class="gallery-item"><img src="99.jpg" alt=""></div>
-<div class="gallery-item"><img src="100.jpg" alt=""></div>
-<div class="gallery-item"><img src="101.jpg" alt=""></div>
-<div class="gallery-item"><img src="102.jpg" alt=""></div>
-<div class="gallery-item"><img src="103.jpg" alt=""></div>
-<div class="gallery-item"><img src="104.jpg" alt=""></div>
-<div class="gallery-item"><img src="105.jpg" alt=""></div>
-<div class="gallery-item"><img src="106.jpg" alt=""></div>
-<div class="gallery-item"><img src="107.jpg" alt=""></div>
-<div class="gallery-item"><img src="108.jpg" alt=""></div>
-<div class="gallery-item"><img src="109.jpg" alt=""></div>
-<div class="gallery-item"><img src="110.jpg" alt=""></div>
-<div class="gallery-item"><img src="111.jpg" alt=""></div>
-<div class="gallery-item"><img src="112.jpg" alt=""></div>
-<div class="gallery-item"><img src="113.jpg" alt=""></div>
-<div class="gallery-item"><img src="114.jpg" alt=""></div>
-<div class="gallery-item"><img src="115.jpg" alt=""></div>
-<div class="gallery-item"><img src="116.jpg" alt=""></div>
-<div class="gallery-item"><img src="117.jpg" alt=""></div>
-<div class="gallery-item"><img src="118.jpg" alt=""></div>
-<div class="gallery-item"><img src="119.jpg" alt=""></div>
-<div class="gallery-item"><img src="120.jpg" alt=""></div>
-<div class="gallery-item"><img src="121.jpg" alt=""></div>
-<div class="gallery-item"><img src="122.jpg" alt=""></div>
-<div class="gallery-item"><img src="123.jpg" alt=""></div>
-<div class="gallery-item"><img src="124.jpg" alt=""></div>
-<div class="gallery-item"><img src="125.jpg" alt=""></div>
-<div class="gallery-item"><img src="126.jpg" alt=""></div>
-<div class="gallery-item"><img src="127.jpg" alt=""></div>
-<div class="gallery-item"><img src="128.jpg" alt=""></div>
-<div class="gallery-item"><img src="129.jpg" alt=""></div>
-<div class="gallery-item"><img src="130.jpg" alt=""></div>
-<div class="gallery-item"><img src="131.jpg" alt=""></div>
-<div class="gallery-item"><img src="132.jpg" alt=""></div>
-<div class="gallery-item"><img src="3.jpg" alt=""></div>
-<div class="gallery-item"><img src="2.jpg" alt="Harish Bhatta – Health & Everyday Life Creator"></div>
-<div class="gallery-item"><img src="1.jpg" alt=""></div>
-</div>
-</div>
-
-<!-- SINGLE IMAGE VIEW -->
-<div id="singleView">
-<div class="viewCard">
-
-<span class="closeBtn" id="closeBtn">✖</span>
-
-<img id="prevPreview" class="sidePreview">
-<img id="nextPreview" class="sidePreview">
-
-<button class="navBtn" id="prevBtn">◀</button>
-
-<img id="fullImage" src="">
-
-<button class="navBtn" id="nextBtn">▶</button>
-
-<a id="downloadBtn" href="#" download>⬇ Download</a>
-
-</div>
-</div>
-
-<footer>
-© 2026 HB Creations | Health & Everyday Life | Made with ❤
-</footer>
-</div>
-</div>
-
-<!-- ================= MOBILE VERSION ================= -->
 <div id="mobileVersion">
   <div class="main-title">
     <div id="menu-button">☰</div>
@@ -622,6 +405,9 @@ position:fixed; top:0; left:-260px; width:260px; height:100%; background:#fff; z
       <a href="bmi-calculator.html">B</a>
       <a href="gallery.html" class="active">G</a>
     </div>
+    <label class="theme-switch" for="darkModeToggle" style="transform: scale(0.8); margin-left: auto;">
+      <span class="slider"></span>
+    </label>
   </div>
 
   <div id="sidebar">
@@ -657,443 +443,309 @@ position:fixed; top:0; left:-260px; width:260px; height:100%; background:#fff; z
       <ul>
         <li><a href="connect.html">📞 Contact</a></li>
         <li><a href="about.html">ℹ️ About Us</a></li>
-        <li><a style="text-decoration:none;color:#1877f2;" href="https://www.facebook.com/harish.bhatta.56305" target="_blank">🌐 Facebook</a></li>
-        <li><a style="text-decoration:none;color:#ff0000;" href="https://www.youtube.com/channel/UC8-7dNFrLe4QynzU5cM68cg" target="_blank">▶ YouTube</a></li>
       </ul>
     </div>
   </div>
 
   <div id="menuOverlay"></div>
 
-<div class="main">
-<div class="section-title">Gallery</div>
+  <div class="main">
+    <div class="section-title"><span>Interactive Gallery</span></div>
 
-<!-- GALLERY GRID -->
-<div class="card" id="galleryGrid">
-<div class="gallery">
-<div class="gallery-item"><img src="4.jpg" alt=""></div>
-<div class="gallery-item"><img src="5.jpg" alt=""></div>
-<div class="gallery-item"><img src="6.jpg" alt=""></div>
-<div class="gallery-item"><img src="7.jpg" alt=""></div>
-<div class="gallery-item"><img src="8.jpg" alt=""></div>
-<div class="gallery-item"><img src="9.jpg" alt=""></div>
-<div class="gallery-item"><img src="10.jpg" alt=""></div>
-<div class="gallery-item"><img src="11.jpg" alt=""></div>
-<div class="gallery-item"><img src="12.jpg" alt=""></div>
-<div class="gallery-item"><img src="13.jpg" alt=""></div>
-<div class="gallery-item"><img src="14.jpg" alt=""></div>
-<div class="gallery-item"><img src="15.jpg" alt=""></div>
-<div class="gallery-item"><img src="16.jpg" alt=""></div>
-<div class="gallery-item"><img src="17.jpg" alt=""></div>
-<div class="gallery-item"><img src="18.jpg" alt=""></div>
-<div class="gallery-item"><img src="19.jpg" alt=""></div>
-<div class="gallery-item"><img src="20.jpg" alt=""></div>
-<div class="gallery-item"><img src="21.jpg" alt=""></div>
-<div class="gallery-item"><img src="22.jpg" alt=""></div>
-<div class="gallery-item"><img src="23.jpg" alt=""></div>
-<div class="gallery-item"><img src="24.jpg" alt=""></div>
-<div class="gallery-item"><img src="25.jpg" alt=""></div>
-<div class="gallery-item"><img src="26.jpg" alt=""></div>
-<div class="gallery-item"><img src="27.jpg" alt=""></div>
-<div class="gallery-item"><img src="28.jpg" alt=""></div>
-<div class="gallery-item"><img src="29.jpg" alt=""></div>
-<div class="gallery-item"><img src="30.jpg" alt=""></div>
-<div class="gallery-item"><img src="31.jpg" alt=""></div>
-<div class="gallery-item"><img src="32.jpg" alt=""></div>
-<div class="gallery-item"><img src="33.jpg" alt=""></div>
-<div class="gallery-item"><img src="34.jpg" alt=""></div>
-<div class="gallery-item"><img src="35.jpg" alt=""></div>
-<div class="gallery-item"><img src="36.jpg" alt=""></div>
-<div class="gallery-item"><img src="37.jpg" alt=""></div>
-<div class="gallery-item"><img src="38.jpg" alt=""></div>
-<div class="gallery-item"><img src="39.jpg" alt=""></div>
-<div class="gallery-item"><img src="40.jpg" alt=""></div>
-<div class="gallery-item"><img src="41.jpg" alt=""></div>
-<div class="gallery-item"><img src="42.jpg" alt=""></div>
-<div class="gallery-item"><img src="43.jpg" alt=""></div>
-<div class="gallery-item"><img src="44.jpg" alt=""></div>
-<div class="gallery-item"><img src="45.jpg" alt=""></div>
-<div class="gallery-item"><img src="46.jpg" alt=""></div>
-<div class="gallery-item"><img src="47.jpg" alt=""></div>
-<div class="gallery-item"><img src="48.jpg" alt=""></div>
-<div class="gallery-item"><img src="49.jpg" alt=""></div>
-<div class="gallery-item"><img src="50.jpg" alt=""></div>
-<div class="gallery-item"><img src="51.jpg" alt=""></div>
-<div class="gallery-item"><img src="52.jpg" alt=""></div>
-<div class="gallery-item"><img src="53.jpg" alt=""></div>
-<div class="gallery-item"><img src="54.jpg" alt=""></div>
-<div class="gallery-item"><img src="55.jpg" alt=""></div>
-<div class="gallery-item"><img src="56.jpg" alt=""></div>
-<div class="gallery-item"><img src="57.jpg" alt=""></div>
-<div class="gallery-item"><img src="58.jpg" alt=""></div>
-<div class="gallery-item"><img src="59.jpg" alt=""></div>
-<div class="gallery-item"><img src="60.jpg" alt=""></div>
-<div class="gallery-item"><img src="61.jpg" alt=""></div>
-<div class="gallery-item"><img src="62.jpg" alt=""></div>
-<div class="gallery-item"><img src="63.jpg" alt=""></div>
-<div class="gallery-item"><img src="64.jpg" alt=""></div>
-<div class="gallery-item"><img src="65.jpg" alt=""></div>
-<div class="gallery-item"><img src="66.jpg" alt=""></div>
-<div class="gallery-item"><img src="67.jpg" alt=""></div>
-<div class="gallery-item"><img src="68.jpg" alt=""></div>
-<div class="gallery-item"><img src="69.jpg" alt=""></div>
-<div class="gallery-item"><img src="70.jpg" alt=""></div>
-<div class="gallery-item"><img src="71.jpg" alt=""></div>
-<div class="gallery-item"><img src="72.jpg" alt=""></div>
-<div class="gallery-item"><img src="73.jpg" alt=""></div>
-<div class="gallery-item"><img src="74.jpg" alt=""></div>
-<div class="gallery-item"><img src="75.jpg" alt=""></div>
-<div class="gallery-item"><img src="76.jpg" alt=""></div>
-<div class="gallery-item"><img src="77.jpg" alt=""></div>
-<div class="gallery-item"><img src="78.jpg" alt=""></div>
-<div class="gallery-item"><img src="79.jpg" alt=""></div>
-<div class="gallery-item"><img src="80.jpg" alt=""></div>
-<div class="gallery-item"><img src="81.jpg" alt=""></div>
-<div class="gallery-item"><img src="82.jpg" alt=""></div>
-<div class="gallery-item"><img src="83.jpg" alt=""></div>
-<div class="gallery-item"><img src="84.jpg" alt=""></div>
-<div class="gallery-item"><img src="85.jpg" alt=""></div>
-<div class="gallery-item"><img src="86.jpg" alt=""></div>
-<div class="gallery-item"><img src="87.jpg" alt=""></div>
-<div class="gallery-item"><img src="88.jpg" alt=""></div>
-<div class="gallery-item"><img src="89.jpg" alt=""></div>
-<div class="gallery-item"><img src="90.jpg" alt=""></div>
-<div class="gallery-item"><img src="91.jpg" alt=""></div>
-<div class="gallery-item"><img src="92.jpg" alt=""></div>
-<div class="gallery-item"><img src="93.jpg" alt=""></div>
-<div class="gallery-item"><img src="94.jpg" alt=""></div>
-<div class="gallery-item"><img src="95.jpg" alt=""></div>
-<div class="gallery-item"><img src="96.jpg" alt=""></div>
-<div class="gallery-item"><img src="97.jpg" alt=""></div>
-<div class="gallery-item"><img src="98.jpg" alt=""></div>
-<div class="gallery-item"><img src="99.jpg" alt=""></div>
-<div class="gallery-item"><img src="100.jpg" alt=""></div>
-<div class="gallery-item"><img src="101.jpg" alt=""></div>
-<div class="gallery-item"><img src="102.jpg" alt=""></div>
-<div class="gallery-item"><img src="103.jpg" alt=""></div>
-<div class="gallery-item"><img src="104.jpg" alt=""></div>
-<div class="gallery-item"><img src="105.jpg" alt=""></div>
-<div class="gallery-item"><img src="106.jpg" alt=""></div>
-<div class="gallery-item"><img src="107.jpg" alt=""></div>
-<div class="gallery-item"><img src="108.jpg" alt=""></div>
-<div class="gallery-item"><img src="109.jpg" alt=""></div>
-<div class="gallery-item"><img src="110.jpg" alt=""></div>
-<div class="gallery-item"><img src="111.jpg" alt=""></div>
-<div class="gallery-item"><img src="112.jpg" alt=""></div>
-<div class="gallery-item"><img src="113.jpg" alt=""></div>
-<div class="gallery-item"><img src="114.jpg" alt=""></div>
-<div class="gallery-item"><img src="115.jpg" alt=""></div>
-<div class="gallery-item"><img src="116.jpg" alt=""></div>
-<div class="gallery-item"><img src="117.jpg" alt=""></div>
-<div class="gallery-item"><img src="118.jpg" alt=""></div>
-<div class="gallery-item"><img src="119.jpg" alt=""></div>
-<div class="gallery-item"><img src="120.jpg" alt=""></div>
-<div class="gallery-item"><img src="121.jpg" alt=""></div>
-<div class="gallery-item"><img src="122.jpg" alt=""></div>
-<div class="gallery-item"><img src="123.jpg" alt=""></div>
-<div class="gallery-item"><img src="124.jpg" alt=""></div>
-<div class="gallery-item"><img src="125.jpg" alt=""></div>
-<div class="gallery-item"><img src="126.jpg" alt=""></div>
-<div class="gallery-item"><img src="127.jpg" alt=""></div>
-<div class="gallery-item"><img src="128.jpg" alt=""></div>
-<div class="gallery-item"><img src="129.jpg" alt=""></div>
-<div class="gallery-item"><img src="130.jpg" alt=""></div>
-<div class="gallery-item"><img src="131.jpg" alt=""></div>
-<div class="gallery-item"><img src="132.jpg" alt=""></div>
-<div class="gallery-item"><img src="3.jpg" alt=""></div>
-<div class="gallery-item"><img src="2.jpg" alt="Harish Bhatta – Health & Everyday Life Creator"></div>
-<div class="gallery-item"><img src="1.jpg" alt=""></div>
-</div>
-</div>
+    <div class="gallery-grid" id="mobileGrid"></div>
 
-<!-- SINGLE IMAGE VIEW -->
-<div id="singleView">
-  <div class="viewCard">
-    <span class="closeBtn" id="closeBtn">✖</span>
-
-    <!-- Swipe container for mobile carousel -->
-    <div id="swipeContainer">
-      <img id="fullImage" src="" />
-    </div>
-
-    <a id="downloadBtn" href="#" download>⬇ Download</a>
+    <footer><span>© 2026 HB Creations | Made with ❤</span></footer>
   </div>
 </div>
 
-<footer>© 2026 HB Creations | Made with ❤</footer>
-</div>
+<div id="globalLightbox" class="confined-lightbox">
+  <button id="closeLightBox" class="lightbox-btn" title="Close"><i class="fa-solid fa-xmark"></i></button>
+  <a id="dlLightBox" class="lightbox-btn" title="Download Image" href="#" download><i class="fa-solid fa-download"></i></a>
+  <button id="prevLightBox" class="lightbox-btn"><i class="fa-solid fa-chevron-left"></i></button>
+  <button id="nextLightBox" class="lightbox-btn"><i class="fa-solid fa-chevron-right"></i></button>
+  <div class="lightbox-viewport" id="viewportContainer">
+    <img id="lightboxTargetImg" class="focal-target" src="" alt="Focused View">
+  </div>
 </div>
 
 <script>
-function initGallery(versionId, isMobile = false) {
-    const container = document.getElementById(versionId);
-    const galleryImages = container.querySelectorAll(".gallery-item img");
-    const galleryGrid = container.querySelector("#galleryGrid");
-    const singleView = container.querySelector("#singleView");
-    const fullImage = container.querySelector("#fullImage");
-    const downloadBtn = container.querySelector("#downloadBtn");
-    const closeBtn = container.querySelector("#closeBtn");
-    const prevBtn = !isMobile ? container.querySelector("#prevBtn") : null;
-    const nextBtn = !isMobile ? container.querySelector("#nextBtn") : null;
-
-    // <-- Add preview references -->
-    const prevPreview = container.querySelector("#prevPreview");
-    const nextPreview = container.querySelector("#nextPreview");
-
-    let currentIndex = 0;
-    let startX = 0;
-    let currentTranslate = 0;
-    let isDragging = false;
-    let scrollPos = 0;
-
-    /* OPEN VIEWER */
-    function openSingleView(index) {
-        currentIndex = index;
-        scrollPos = window.scrollY || window.pageYOffset;
-        galleryGrid.style.display = "none";
-        singleView.style.display = "flex";
-        showImage();
-        document.body.style.overflow = "hidden";
-        if (isMobile) history.pushState({ viewer: true }, "");
-    }
-
-    /* SHOW IMAGE */
-    function showImage() {
-        fullImage.style.opacity = "0";
-        setTimeout(() => {
-            fullImage.src = galleryImages[currentIndex].src;
-            downloadBtn.href = galleryImages[currentIndex].src;
-            fullImage.style.opacity = "1";
-            if (!isMobile) updateButtons();
-            updatePreviews(); // <-- update preview images
-        }, 100);
-    }
-
-    /* UPDATE BUTTONS (PC) */
-    function updateButtons() {
-        if (prevBtn) prevBtn.style.display = currentIndex === 0 ? "none" : "block";
-        if (nextBtn) nextBtn.style.display = currentIndex === galleryImages.length - 1 ? "none" : "block";
-    }
-
-    /* UPDATE PREV/NEXT PREVIEW IMAGES */
-    function updatePreviews() {
-        if (prevPreview) {
-            if (currentIndex > 0) {
-                prevPreview.style.display = "block";
-                prevPreview.src = galleryImages[currentIndex - 1].src;
-            } else {
-                prevPreview.style.display = "none";
-            }
-        }
-        if (nextPreview) {
-            if (currentIndex < galleryImages.length - 1) {
-                nextPreview.style.display = "block";
-                nextPreview.src = galleryImages[currentIndex + 1].src;
-            } else {
-                nextPreview.style.display = "none";
-            }
-        }
-    }
-
-    /* CLOSE VIEWER */
-    function closeViewer() {
-        singleView.style.display = "none";
-        galleryGrid.style.display = "grid";
-        document.body.style.overflow = "auto";
-        window.scrollTo(0, scrollPos);
-    }
-
-    /* OPEN IMAGE EVENTS */
-    galleryImages.forEach((img, i) => {
-        if (isMobile) {
-            let touchStartX = 0;
-            let touchStartY = 0;
-            img.addEventListener("touchstart", e => {
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-            });
-            img.addEventListener("touchend", e => {
-                const touchEndX = e.changedTouches[0].clientX;
-                const touchEndY = e.changedTouches[0].clientY;
-                const dx = Math.abs(touchEndX - touchStartX);
-                const dy = Math.abs(touchEndY - touchStartY);
-                // Only open image if tap (no significant movement)
-                if (dx < 10 && dy < 10) {
-                    e.preventDefault();
-                    openSingleView(i);
-                }
-            });
-        } else {
-            img.addEventListener("click", e => {
-                e.preventDefault();
-                openSingleView(i);
-            });
-        }
-    });
-
-    /* PREVENT DOWNLOAD BUTTON PROPAGATION */
-    downloadBtn.addEventListener("click", e => e.stopPropagation());
-
-    /* PC BUTTON NAVIGATION */
-    if (prevBtn) prevBtn.onclick = () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            showImage();
-        }
-    };
-    if (nextBtn) nextBtn.onclick = () => {
-        if (currentIndex < galleryImages.length - 1) {
-            currentIndex++;
-            showImage();
-        }
-    };
-
-    /* PREV/NEXT PREVIEW CLICK */
-    if (prevPreview) prevPreview.addEventListener("click", () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            showImage();
-        }
-    });
-    if (nextPreview) nextPreview.addEventListener("click", () => {
-        if (currentIndex < galleryImages.length - 1) {
-            currentIndex++;
-            showImage();
-        }
-    });
-
-    /* CLOSE BUTTON */
-    closeBtn.onclick = () => {
-        if (isMobile) history.back();
-        else closeViewer();
-    };
-
-    /* KEYBOARD NAVIGATION (PC) */
-    if (!isMobile) {
-        document.addEventListener("keydown", e => {
-            if (singleView.style.display !== "flex") return;
- // Alt + Left Arrow → go back to gallery
-    if (e.altKey && e.key === "ArrowLeft") {
-        e.preventDefault(); // prevent default browser action
-        closeViewer();
-    }
-            if (e.key === "ArrowLeft" && currentIndex > 0) {
-                currentIndex--;
-                showImage();
-            }
-            if (e.key === "ArrowRight" && currentIndex < galleryImages.length - 1) {
-                currentIndex++;
-                showImage();
-            }
-            if (e.key === "Backspace") closeViewer();
-
-            if (e.key === "Escape") {
-            e.preventDefault();
-            closeViewer();
-            }
-        });
-    }
-
-    /* MOBILE SWIPE CAROUSEL */
-    if (isMobile) {
-        fullImage.addEventListener("touchstart", e => {
-            startX = e.touches[0].clientX;
-            isDragging = true;
-            fullImage.style.transition = "none";
-        });
-        fullImage.addEventListener("touchmove", e => {
-            if (!isDragging) return;
-            const currentX = e.touches[0].clientX;
-            currentTranslate = currentX - startX;
-            fullImage.style.transform = `translateX(${currentTranslate}px)`;
-        });
-        fullImage.addEventListener("touchend", () => {
-            if (!isDragging) return;
-            isDragging = false;
-            const threshold = 40;
-            fullImage.style.transition = "transform .3s ease";
-            if (currentTranslate < -threshold && currentIndex < galleryImages.length - 1) {
-                fullImage.style.transform = "translateX(-100%)";
-                setTimeout(() => {
-                    currentIndex++;
-                    fullImage.src = galleryImages[currentIndex].src;
-                    fullImage.style.transition = "none";
-                    fullImage.style.transform = "translateX(100%)";
-                    setTimeout(() => {
-                        fullImage.style.transition = "transform .3s ease";
-                        fullImage.style.transform = "translateX(0)";
-                    }, 20);
-                    updatePreviews();
-                }, 20);
-            } else if (currentTranslate > threshold && currentIndex > 0) {
-                fullImage.style.transform = "translateX(100%)";
-                setTimeout(() => {
-                    currentIndex--;
-                    fullImage.src = galleryImages[currentIndex].src;
-                    fullImage.style.transition = "none";
-                    fullImage.style.transform = "translateX(-100%)";
-                    setTimeout(() => {
-                        fullImage.style.transition = "transform .3s ease";
-                        fullImage.style.transform = "translateX(0)";
-                    }, 20);
-                    updatePreviews();
-                }, 20);
-            } else {
-                fullImage.style.transform = "translateX(0)";
-            }
-            currentTranslate = 0;
-        });
-
-        /* MOBILE BACK BUTTON */
-        window.addEventListener("popstate", () => {
-            if (singleView.style.display === "flex") closeViewer();
-        });
-    }
-}
-
-/* INIT GALLERIES */
-initGallery("pcVersion", false);
-initGallery("mobileVersion", true);
-
-/* SIDEBAR */
+/* ================= CORE UI SIDEBAR ENGINE ================= */
 const menuButton = document.getElementById("menu-button");
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("menuOverlay");
 
 function openSidebar() {
-    sidebar.classList.add("open");
-    overlay.classList.add("active");
-    document.body.style.overflow = "hidden";
-    history.pushState({ menu: true }, "");
+  if(!sidebar || !overlay) return;
+  sidebar.classList.add("open");
+  overlay.classList.add("active");
+  document.body.style.overflow = 'hidden';
+  window.scrollTo({ top: 0, behavior: 'smooth' }); 
+  history.pushState({ menu: true }, "");
 }
 
 function closeSidebar() {
-    sidebar.classList.remove("open");
-    overlay.classList.remove("active");
-    document.body.style.overflow = "";
+  if(!sidebar || !overlay) return;
+  sidebar.classList.remove("open");
+  overlay.classList.remove("active");
+  document.body.style.overflow = '';
 }
 
-function toggleSidebar() {
-    sidebar.classList.contains("open") ? closeSidebar() : openSidebar();
+if (menuButton) menuButton.addEventListener("click", () => {
+  if (sidebar && sidebar.classList.contains("open")) { closeSidebar(); } else { openSidebar(); }
+});
+if (overlay) overlay.addEventListener("click", closeSidebar);
+
+/* --- Global Dark Mode State Synchronization --- */
+const toggleNode = document.getElementById('darkModeToggle');
+function setTheme(isDark) {
+  if (isDark) {
+    document.body.classList.add('dark-mode');
+    if (toggleNode) toggleNode.checked = true;
+    localStorage.setItem('hb-dark-mode', 'enabled');
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (toggleNode) toggleNode.checked = false;
+    localStorage.setItem('hb-dark-mode', 'disabled');
+  }
 }
+if (toggleNode) toggleNode.addEventListener('change', (e) => setTheme(e.target.checked));
+if (localStorage.getItem('hb-dark-mode') === 'enabled') setTheme(true);
 
-menuButton.addEventListener("click", toggleSidebar);
-overlay.addEventListener("click", closeSidebar);
+/* ================= THE STABLE PICTURE ARRAY & STATE SYSTEM ================= */
+const pcImages = Array.from(document.querySelectorAll('#pcGrid img')).map(img => img.getAttribute('src'));
+const mobileGrid = document.getElementById('mobileGrid');
 
-window.addEventListener("popstate", () => {
-    if (sidebar.classList.contains("open")) closeSidebar();
+pcImages.forEach((src, idx) => {
+  const card = document.createElement('div');
+  card.className = 'gallery-item-card';
+  card.setAttribute('onclick', `openLightbox(${idx})`);
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = "Gallery Media";
+  card.appendChild(img);
+  mobileGrid.appendChild(card);
 });
 
-let touchStartX = 0;
-let touchEndX = 0;
-document.addEventListener("touchstart", (e) => { touchStartX = e.changedTouches[0].screenX; });
-document.addEventListener("touchend", (e) => { touchEndX = e.changedTouches[0].screenX; handleSwipe(); });
+const lightbox = document.getElementById('globalLightbox');
+const lightboxImg = document.getElementById('lightboxTargetImg');
+const viewportContainer = document.getElementById('viewportContainer');
+const downloadBtn = document.getElementById('dlLightBox');
 
-function handleSwipe() {
-    if (sidebar.classList.contains("open")) {
-        if (touchStartX - touchEndX > 60) { closeSidebar(); }
-    }
+let currentIdx = 0;
+let currentScale = 1;
+let translateX = 0;
+let translateY = 0;
+let isDragging = false;
+let startX = 0, startY = 0;
+
+// Hard boundary framework calculation
+function enforceClampedBoundaries(tgtScale, proposedX, proposedY) {
+  if (tgtScale <= 1) return { x: 0, y: 0 };
+  
+  const vRect = viewportContainer.getBoundingClientRect();
+  
+  const maxLimitX = Math.max(0, ((vRect.width * tgtScale) - vRect.width) / 2);
+  const maxLimitY = Math.max(0, ((vRect.height * tgtScale) - vRect.height) / 2);
+  
+  return {
+    x: Math.min(Math.max(proposedX, -maxLimitX), maxLimitX),
+    y: Math.min(Math.max(proposedY, -maxLimitY), maxLimitY)
+  };
 }
+
+function resetZoom() {
+  currentScale = 1;
+  translateX = 0;
+  translateY = 0;
+  lightboxImg.style.transform = `translate(0px, 0px) scale(1)`;
+  lightboxImg.style.cursor = 'zoom-in';
+}
+
+function updateImageTransform() {
+  lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+}
+
+function openLightbox(index) {
+  currentIdx = index;
+  lightboxImg.src = pcImages[currentIdx];
+  downloadBtn.href = pcImages[currentIdx]; // Smooth working local download link binding
+  lightbox.style.display = 'block';
+  resetZoom(); 
+  if (window.innerWidth <= 768) document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function changeImage(direction) {
+  currentIdx = (currentIdx + direction + pcImages.length) % pcImages.length;
+  lightboxImg.style.transform = "none"; 
+  lightboxImg.src = pcImages[currentIdx];
+  downloadBtn.href = pcImages[currentIdx]; // Update download asset on target change
+  resetZoom(); 
+}
+
+/* ================= DIRECT ATTACHMENT CONTROLS ================= */
+downloadBtn.addEventListener('click', (e) => {
+  e.stopPropagation(); // Prevents parent nodes from locking up trigger event rules
+});
+
+document.getElementById('closeLightBox').addEventListener('click', closeLightbox);
+document.getElementById('prevLightBox').addEventListener('click', () => changeImage(-1));
+document.getElementById('nextLightBox').addEventListener('click', () => changeImage(1));
+
+document.addEventListener('keydown', (e) => {
+  if (lightbox.style.display === 'block') {
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+    if (e.key === 'Escape') closeLightbox();
+  }
+});
+
+/* ================= POINTER-BOUNDS FIXED 0.1 ZOOM ENGINE ================= */
+lightboxImg.addEventListener('wheel', (e) => {
+  e.preventDefault(); 
+  e.stopPropagation(); 
+  
+  const zoomFactor = 0.1; // Configured directly to your preferred 0.1 profile
+  const oldScale = currentScale;
+  
+  if (e.deltaY < 0) {
+    currentScale = Math.min(currentScale + zoomFactor, 5);
+  } else {
+    currentScale = Math.max(currentScale - zoomFactor, 1);
+  }
+  
+  if (currentScale === 1) {
+    translateX = 0;
+    translateY = 0;
+  } else {
+    const rect = lightboxImg.getBoundingClientRect();
+    
+    const cursorX = e.clientX - rect.left;
+    const cursorY = e.clientY - rect.top;
+    
+    const scaleRatio = currentScale / oldScale;
+    const nextX = translateX - (cursorX - (rect.width / 2)) * (scaleRatio - 1);
+    const nextY = translateY - (cursorY - (rect.height / 2)) * (scaleRatio - 1);
+    
+    const clamped = enforceClampedBoundaries(currentScale, nextX, nextY);
+    translateX = clamped.x;
+    translateY = clamped.y;
+  }
+  
+  updateImageTransform();
+}, { passive: false });
+
+/* ================= PC PANNING DRAG LISTENERS ================= */
+lightboxImg.addEventListener('mousedown', (e) => {
+  e.preventDefault();
+  if (currentScale > 1) {
+    isDragging = true;
+    startX = e.clientX - translateX;
+    startY = e.clientY - translateY;
+    lightboxImg.style.cursor = 'grabbing';
+  }
+});
+
+window.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const proposedX = e.clientX - startX;
+  const proposedY = e.clientY - startY;
+  
+  const clamped = enforceClampedBoundaries(currentScale, proposedX, proposedY);
+  translateX = clamped.x;
+  translateY = clamped.y;
+  
+  updateImageTransform();
+});
+
+window.addEventListener('mouseup', () => {
+  isDragging = false;
+  if(lightboxImg) lightboxImg.style.cursor = currentScale > 1 ? 'zoom-out' : 'zoom-in';
+});
+
+/* ================= MOBILE TOUCH ENGINE ================= */
+let touchMode = 'none'; 
+let mobileSwipeStartX = 0, mobileSwipeStartY = 0;
+let initialTouchDistance = 0;
+let touchPinchAnchorX = 0, touchPinchAnchorY = 0;
+
+viewportContainer.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    mobileSwipeStartX = e.touches[0].clientX;
+    mobileSwipeStartY = e.touches[0].clientY;
+    if (currentScale > 1) {
+      touchMode = 'pan';
+      startX = e.touches[0].clientX - translateX;
+      startY = e.touches[0].clientY - translateY;
+    } else {
+      touchMode = 'swipe';
+    }
+  } else if (e.touches.length === 2) {
+    touchMode = 'zoom';
+    const t1 = e.touches[0];
+    const t2 = e.touches[1];
+    initialTouchDistance = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+    
+    const rect = viewportContainer.getBoundingClientRect();
+    touchPinchAnchorX = ((t1.clientX + t2.clientX) / 2) - rect.left;
+    touchPinchAnchorY = ((t1.clientY + t2.clientY) / 2) - rect.top;
+  }
+}, { passive: true });
+
+viewportContainer.addEventListener('touchmove', (e) => {
+  if (touchMode === 'pan' && e.touches.length === 1) {
+    const proposedX = e.touches[0].clientX - startX;
+    const proposedY = e.touches[0].clientY - startY;
+    
+    const clamped = enforceClampedBoundaries(currentScale, proposedX, proposedY);
+    translateX = clamped.x;
+    translateY = clamped.y;
+    updateImageTransform();
+  } else if (touchMode === 'zoom' && e.touches.length === 2) {
+    const t1 = e.touches[0];
+    const t2 = e.touches[1];
+    const activeDistance = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+    
+    if (initialTouchDistance > 0) {
+      const scaleRatio = activeDistance / initialTouchDistance;
+      const oldScale = currentScale;
+      
+      currentScale = Math.min(Math.max(currentScale * scaleRatio, 1), 5);
+      initialTouchDistance = activeDistance;
+      
+      if (currentScale === 1) {
+        translateX = 0;
+        translateY = 0;
+      } else {
+        const nextX = touchPinchAnchorX - (touchPinchAnchorX - translateX) * (currentScale / oldScale);
+        const nextY = touchPinchAnchorY - (touchPinchAnchorY - translateY) * (currentScale / oldScale);
+        
+        const clamped = enforceClampedBoundaries(currentScale, nextX, nextY);
+        translateX = clamped.x;
+        translateY = clamped.y;
+      }
+      updateImageTransform();
+    }
+  }
+}, { passive: true });
+
+viewportContainer.addEventListener('touchend', (e) => {
+  if (touchMode === 'swipe' && e.changedTouches.length === 1) {
+    const deltaX = e.changedTouches[0].clientX - mobileSwipeStartX;
+    const deltaY = e.changedTouches[0].clientY - mobileSwipeStartY;
+    
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+      if (deltaX > 0) changeImage(-1); else changeImage(1);
+    } else if (Math.abs(deltaY) > 70 && deltaY > 0) {
+      closeLightbox();
+    }
+  }
+  touchMode = 'none';
+}, { passive: true });
 </script>
 
 </body>
